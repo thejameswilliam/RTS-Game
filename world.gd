@@ -4,9 +4,11 @@ var units: Array = []
 
 
 func _ready():
+	get_units()
+	
+func get_units():
+	units = []
 	units = get_tree().get_nodes_in_group("units")
-
-
 
 func _on_area_selected(object):
 	var start = object.start
