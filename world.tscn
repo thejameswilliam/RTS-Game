@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://k8ftx0qfbnv5"]
+[gd_scene load_steps=9 format=3 uid="uid://k8ftx0qfbnv5"]
 
 [ext_resource type="Script" path="res://UI/Camera.gd" id="1_kjri0"]
 [ext_resource type="Script" path="res://world.gd" id="1_kstvi"]
+[ext_resource type="PackedScene" uid="uid://duvegjudp7c0u" path="res://units/worker.tscn" id="2_7u3o2"]
 [ext_resource type="Texture2D" uid="uid://i10bximvko5u" path="res://images/MiniWorldSprites/Ground/TexturedGrass.png" id="2_srcar"]
 [ext_resource type="PackedScene" uid="uid://dqa0sxgaqcyjp" path="res://World Objects/tree.tscn" id="4_dbqhf"]
 [ext_resource type="PackedScene" uid="uid://bg2ohhatacu6c" path="res://UI/ui.tscn" id="5_v8451"]
-[ext_resource type="PackedScene" uid="uid://occa8lx1sxeo" path="res://Houses/barbHouse.tscn" id="7_230ge"]
+[ext_resource type="PackedScene" uid="uid://occa8lx1sxeo" path="res://Houses/workerHouse.tscn" id="7_230ge"]
+[ext_resource type="PackedScene" uid="uid://b57ofnq5htffv" path="res://units/warrior.tscn" id="8_6l7lt"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -36,6 +38,9 @@ script = ExtResource("1_kjri0")
 [node name="Units" type="Node2D" parent="."]
 y_sort_enabled = true
 
+[node name="Unit" parent="Units" instance=ExtResource("2_7u3o2")]
+position = Vector2(-40, 27)
+
 [node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -65,3 +70,6 @@ y_sort_enabled = true
 
 [node name="BarbHouse" parent="Houses" instance=ExtResource("7_230ge")]
 position = Vector2(-40, -25)
+
+[node name="Unit" parent="." instance=ExtResource("8_6l7lt")]
+position = Vector2(20, 20)

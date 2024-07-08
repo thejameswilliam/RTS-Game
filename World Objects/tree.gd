@@ -22,13 +22,15 @@ func _process(_delta):
 		
 
 func _on_chop_area_body_entered(body):
-	if body.is_in_group("units"):
+	var group = body.get_groups()
+	print(group)
+	if body.is_in_group("workers"):
 		unitsCount += 1
 		start_chopping()
 	
 
 func _on_chop_area_body_exited(body):
-	if body.is_in_group("units"):
+	if body.is_in_group("workers"):
 		unitsCount -= 1
 		if unitsCount <= 0:
 			end_chopping()	

@@ -1,26 +1,31 @@
 extends Node2D
 
-@onready var unit = preload("res://unit/unit.tscn")
+@onready var worker = preload("res://units/worker.tscn")
+@onready var warrior = preload("res://units/warrior.tscn")
 
-var housePos = Vector2(300,300)
+func _on_create_worker_pressed():
 
-func _on_create_pressed():
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	
-	var randomPosX = rng.randi_range(-50,50)
-	var randomPosY = rng.randi_range(-50,50)
-	
-	
 	var unitPath = get_tree().get_root().get_node("World/Units")
 	var worldPath = get_tree().get_root().get_node("World")
-	var unit1 = unit.instantiate()
-	
-	unit1.position = housePos + Vector2(randomPosX, randomPosY)
-	unitPath.add_child(unit1)
-	
+	var worker1 = worker.instantiate()
+
+	unitPath.add_child(worker1)
 	
 	worldPath.get_units()
+
+
+
+
+func _on_create_warrior_pressed():
+	var unitPath = get_tree().get_root().get_node("World/Units")
+	var worldPath = get_tree().get_root().get_node("World")
+	var warrior1 = warrior.instantiate()
+	warrior1.position = Vector2(300, 300)
+	unitPath.add_child(warrior1)
+	
+	worldPath.get_units()
+
+
 
 func _on_close_pressed():
 	var housePath = get_tree().get_root().get_node("World/Houses")

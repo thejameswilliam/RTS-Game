@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkjsna67jx7bi"]
+
+[ext_resource type="Script" path="res://Global/spwn_unit.gd" id="1_75r1d"]
+[ext_resource type="Texture2D" uid="uid://dddis8r16txr2" path="res://images/MiniWorldSprites/Characters/Workers/RedWorker/FarmerRed.png" id="2_yfobt"]
+[ext_resource type="Texture2D" uid="uid://5l40anv6nppw" path="res://images/MiniWorldSprites/Characters/Soldiers/Melee/RedMelee/SwordsmanRed.png" id="3_kwgt8"]
+
+[node name="SpwnUnit" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_75r1d")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 500.0
+offset_top = 760.0
+offset_right = 1479.0
+offset_bottom = 1165.0
+
+[node name="CreateWorker" type="Button" parent="."]
+offset_left = 620.0
+offset_top = 1060.0
+offset_right = 840.0
+offset_bottom = 1120.0
+text = "WORKER"
+
+[node name="CreateWarrior" type="Button" parent="."]
+offset_left = 880.0
+offset_top = 1060.0
+offset_right = 1100.0
+offset_bottom = 1120.0
+text = "WARRIOR"
+
+[node name="Close" type="Button" parent="."]
+offset_left = 1420.0
+offset_top = 780.0
+offset_right = 1460.0
+offset_bottom = 820.0
+text = "X"
+
+[node name="Worker" type="Sprite2D" parent="."]
+position = Vector2(740, 960)
+scale = Vector2(7.5, 7.5)
+texture = ExtResource("2_yfobt")
+hframes = 5
+vframes = 12
+frame = 23
+
+[node name="Warrior" type="Sprite2D" parent="."]
+position = Vector2(980, 960)
+scale = Vector2(7.5, 7.49999)
+texture = ExtResource("3_kwgt8")
+hframes = 5
+vframes = 12
+frame = 1
+
+[connection signal="pressed" from="CreateWorker" to="." method="_on_create_worker_pressed"]
+[connection signal="pressed" from="CreateWarrior" to="." method="_on_create_warrior_pressed"]
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]

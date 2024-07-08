@@ -11,11 +11,10 @@ func _process(_delta):
 
 func _input(event):
 	if event.is_action_pressed("LeftClick"):
-		print(mouseEntered)
 		if mouseEntered == true:
 			Selected = !Selected
 			if Selected == true:
-				Game.spawnUnit(position)
+				Game.spawnUnitPanel()
 			
 
 

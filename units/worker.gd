@@ -6,13 +6,12 @@ extends CharacterBody2D
 
 @onready var target = position
 var folow_cursor: bool = false
-var speed = 50
-
+var speed = 60
 
 func _ready():
 	set_selected(selected)
+	add_to_group("workers", true)
 	add_to_group("units", true)
-	
 
 func set_selected(_selected: bool):
 	selected = _selected
@@ -36,3 +35,9 @@ func _physics_process(_delta):
 		move_and_slide()
 	else:
 		animation.stop()
+
+
+
+func _on_selection_area_selection_toggled(selection):
+	set_selected(selection)
+	pass # Replace with function body.

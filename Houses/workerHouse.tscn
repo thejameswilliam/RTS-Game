@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://occa8lx1sxeo"]
 
 [ext_resource type="Texture2D" uid="uid://b87jyy7lt6s2e" path="res://images/MiniWorldSprites/Buildings/Wood/Barracks.png" id="1_epl14"]
-[ext_resource type="Script" path="res://Houses/barbHouse.gd" id="1_qqs56"]
+[ext_resource type="Script" path="res://Houses/workerHouse.gd" id="1_qqs56"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vc6x"]
 size = Vector2(32, 33)

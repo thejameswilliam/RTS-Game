@@ -1,26 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://duvegjudp7c0u"]
+[gd_scene load_steps=10 format=3 uid="uid://duvegjudp7c0u"]
 
-[ext_resource type="Texture2D" uid="uid://cwdlhhojrafls" path="res://images/MiniWorldSprites/Characters/Champions/Arthax.png" id="1_4bww5"]
-[ext_resource type="Script" path="res://unit/unit.gd" id="1_iu8js"]
+[ext_resource type="Script" path="res://units/worker.gd" id="1_iu8js"]
+[ext_resource type="Texture2D" uid="uid://dddis8r16txr2" path="res://images/MiniWorldSprites/Characters/Workers/RedWorker/FarmerRed.png" id="2_8h80r"]
+[ext_resource type="Script" path="res://units/SelectionArea.gd" id="3_1a78j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fuosd"]
-size = Vector2(13, 9)
+size = Vector2(13, 15)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pb1ru"]
-bg_color = Color(0.6, 0.6, 0.6, 0.137255)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.172549, 0.537255, 0.854902, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnrev"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5717, 0.913409, 0, 1)
 border_blend = true
+shadow_color = Color(0, 0, 0, 0)
 
 [sub_resource type="Animation" id="Animation_d2aq6"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Arthax:frame")
+tracks/0/path = NodePath("Worker:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -37,7 +39,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Arthax:frame")
+tracks/0/path = NodePath("Worker:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -53,30 +55,42 @@ _data = {
 "Walk Down": SubResource("Animation_p2st4")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_o7xjl"]
+
 [node name="Unit" type="CharacterBody2D"]
 position = Vector2(0, 1)
 script = ExtResource("1_iu8js")
 
-[node name="Arthax" type="Sprite2D" parent="."]
+[node name="Worker" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = ExtResource("1_4bww5")
+texture = ExtResource("2_8h80r")
 hframes = 5
-vframes = 8
+vframes = 12
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -5.5)
+position = Vector2(-0.5, -8.5)
 shape = SubResource("RectangleShape2D_fuosd")
 
 [node name="Box" type="Panel" parent="."]
 offset_left = -8.0
-offset_top = -15.0
+offset_top = -17.0
 offset_right = 7.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_pb1ru")
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_gnrev")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_r57fb")
 }
 
+[node name="SelectionArea" type="Area2D" parent="."]
+script = ExtResource("3_1a78j")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="SelectionArea"]
+position = Vector2(-0.5, -8.5)
+shape = SubResource("CircleShape2D_o7xjl")
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="SelectionArea" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="selection_toggled" from="SelectionArea" to="." method="_on_selection_area_selection_toggled"]
