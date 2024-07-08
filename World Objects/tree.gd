@@ -42,7 +42,7 @@ func _on_timer_timeout():
 	if state == "chopping" :
 		var shopSeed = 1 * unitsCount
 		treeHealth -= shopSeed
-		Game.Wood += shopSeed
+		Game.Resources.Wood += shopSeed
 	elif state == "growing" :
 		if treeHealth < totalTreeHealth:
 			treeHealth += 0.25
@@ -54,7 +54,7 @@ func _on_timer_timeout():
 
 
 func tree_chopped():
-	Game.Wood += 5
+	Game.Resources.Wood += 5
 	state = "dead"
 	queue_free()
 

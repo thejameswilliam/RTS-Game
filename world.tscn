@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://i10bximvko5u" path="res://images/MiniWorldSprites/Ground/TexturedGrass.png" id="2_srcar"]
 [ext_resource type="PackedScene" uid="uid://dqa0sxgaqcyjp" path="res://World Objects/tree.tscn" id="4_dbqhf"]
 [ext_resource type="PackedScene" uid="uid://bg2ohhatacu6c" path="res://UI/ui.tscn" id="5_v8451"]
-[ext_resource type="PackedScene" uid="uid://occa8lx1sxeo" path="res://Houses/workerHouse.tscn" id="7_230ge"]
+[ext_resource type="PackedScene" uid="uid://occa8lx1sxeo" path="res://Houses/barracls.tscn" id="7_230ge"]
 [ext_resource type="PackedScene" uid="uid://b57ofnq5htffv" path="res://units/warrior.tscn" id="8_6l7lt"]
 
 [node name="World" type="Node2D"]

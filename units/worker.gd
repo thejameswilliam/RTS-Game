@@ -7,6 +7,10 @@ extends CharacterBody2D
 @onready var target = position
 var folow_cursor: bool = false
 var speed = 60
+var cost = {
+	"Wood": 0,
+	"Food": 10
+}
 
 func _ready():
 	set_selected(selected)

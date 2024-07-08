@@ -3,8 +3,11 @@ extends Node
 
 @onready var spawn = preload("res://Global/spawn_unit.tscn")
 
-var Wood: int = 20
-var Food: int = 0
+
+var Resources = {
+	"Wood" = 100,
+	"Food" = 200
+}
 
 var WorkerStats = {
 					"pos" = Vector2(300,300),
