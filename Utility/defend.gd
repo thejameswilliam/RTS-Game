@@ -13,6 +13,7 @@ func _ready():
 
 
 func _on_area_entered(area):
+	
 	if area.is_in_group("attack"):
 		if not area.get("damage") == null:
 			match HurtBoxType:
@@ -25,14 +26,7 @@ func _on_area_entered(area):
 					if area.has_method("tempdisable"):
 						area.tempdisable()
 			var damage = area.damage
-			print(damage)
 			emit_signal("defend", damage)
-
-
-func _on_body_entered(body):
-	var groups = body.get_groups()
-	print(get_overlapping_areas())
-	
 
 
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://duvegjudp7c0u"]
 
-[ext_resource type="Script" path="res://units/worker.gd" id="1_iu8js"]
-[ext_resource type="Texture2D" uid="uid://dddis8r16txr2" path="res://images/MiniWorldSprites/Characters/Workers/RedWorker/FarmerRed.png" id="2_8h80r"]
-[ext_resource type="Script" path="res://units/SelectionArea.gd" id="3_1a78j"]
-[ext_resource type="PackedScene" uid="uid://fjqo083wps36" path="res://Utility/defend.tscn" id="4_8uwap"]
+[ext_resource type="Script" path="res://units/worker.gd" id="1_krnlt"]
+[ext_resource type="Texture2D" uid="uid://dddis8r16txr2" path="res://images/MiniWorldSprites/Characters/Workers/RedWorker/FarmerRed.png" id="2_qn3vu"]
+[ext_resource type="Script" path="res://units/SelectionArea.gd" id="3_ui77v"]
+[ext_resource type="PackedScene" uid="uid://fjqo083wps36" path="res://Utility/defend.tscn" id="4_djo7x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnrev"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -69,11 +69,11 @@ position = Vector2(0, 1)
 collision_layer = 2
 collision_mask = 2
 motion_mode = 1
-script = ExtResource("1_iu8js")
+script = ExtResource("1_krnlt")
 
 [node name="Worker" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = ExtResource("2_8h80r")
+texture = ExtResource("2_qn3vu")
 hframes = 5
 vframes = 12
 frame = 1
@@ -91,19 +91,17 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_pk7l2")
 
 [node name="SelectionArea" type="Area2D" parent="."]
-visible = false
-script = ExtResource("3_1a78j")
+script = ExtResource("3_ui77v")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="SelectionArea"]
 position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_o7xjl")
 
-[node name="DefendBox" parent="." instance=ExtResource("4_8uwap")]
+[node name="DefendBox" parent="." instance=ExtResource("4_djo7x")]
 collision_layer = 4
 collision_mask = 4
 

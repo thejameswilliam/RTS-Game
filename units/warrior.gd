@@ -1,12 +1,15 @@
 extends CharacterBody2D
 
 @export var selected: bool = false
+
 @onready var box: Panel = $Box
 @onready var animation: AnimationPlayer = $AnimationPlayer
-
 @onready var target = position
+
 var folow_cursor: bool = false
-var speed = 40
+var movement_speed = 40
+var hit_points = 100
+
 var cost = {
 	"Wood": 5,
 	"Food": 10
@@ -34,7 +37,7 @@ func _physics_process(_delta):
 		if selected:
 			target = get_global_mouse_position()
 			animation.play("Walk Down")
-	velocity = position.direction_to(target) * speed
+	velocity = position.direction_to(target) * movement_speed
 	if position.distance_to(target) > 20:
 		move_and_slide()
 	else:
@@ -45,3 +48,8 @@ func _physics_process(_delta):
 func _on_selection_area_selection_toggled(selection):
 	set_selected(selection)
 	pass # Replace with function body.
+
+
+func _on_defend_box_defend(damage):
+	hit_points -= damage
+	print("Warrior Hit Points: " + str(hit_points))

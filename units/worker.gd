@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 var folow_cursor: bool = false
 var movement_speed = 60
-var hit_points = 80
+var hit_points = 40
 
 var cost = {
 	"Wood": 0,
@@ -51,4 +51,5 @@ func _on_selection_area_selection_toggled(selection):
 
 func _on_defend_box_defend(damage):
 	hit_points -= damage
-	print(hit_points)
+	if hit_points <= 0:
+		queue_free()

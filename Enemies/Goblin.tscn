@@ -72,7 +72,6 @@ libraries = {
 shape = SubResource("CapsuleShape2D_pnmdx")
 
 [node name="AttackBox" parent="." instance=ExtResource("4_vece0")]
-visible = false
 collision_layer = 4
 collision_mask = 4
 
@@ -80,12 +79,13 @@ collision_mask = 4
 shape = SubResource("CapsuleShape2D_ac5q7")
 
 [node name="DefendBox" parent="." instance=ExtResource("3_4deky")]
-visible = false
 collision_layer = 2
 collision_mask = 2
 
 [node name="HurtCollisionShape2D" parent="DefendBox" index="0"]
 shape = SubResource("CapsuleShape2D_3gngs")
+
+[connection signal="defend" from="DefendBox" to="." method="_on_hurt_box_hurt"]
 
 [editable path="AttackBox"]
 [editable path="DefendBox"]

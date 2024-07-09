@@ -26,14 +26,16 @@ func _on_area_selected(object):
 
 func deselect_all_units():
 	for unit in units:
-		unit.set_selected(false)
+		if is_instance_valid(unit):
+			unit.set_selected(false)
 
 
 func get_units_in_area(area: Array):
 	var _units: Array = []
 	for unit in units:
-		if (unit.position.x > area[0].x) and (unit.position.x < area[1].x):
-			if (unit.position.y > area[0].y) and (unit.position.y < area[1].y):
-				_units.append(unit)
+		if is_instance_valid(unit):
+			if (unit.position.x > area[0].x) and (unit.position.x < area[1].x):
+				if (unit.position.y > area[0].y) and (unit.position.y < area[1].y):
+					_units.append(unit)
 	
 	return _units

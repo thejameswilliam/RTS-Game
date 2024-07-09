@@ -6,13 +6,14 @@ extends CharacterBody2D
 
 @onready var animation: AnimationPlayer = $AnimationPlayer
 
+var closest = null
 #
 func _ready():
 	pass
 	
 func _physics_process(_delta):
 	var unit = get_closest_unit()
-	if unit:
+	if is_instance_valid(unit):
 		var distance_to = global_position.distance_to(unit.global_position)
 		var direction = global_position.direction_to(unit.global_position)
 		velocity = direction * movement_speed
@@ -25,18 +26,22 @@ func _physics_process(_delta):
 
 
 func get_closest_unit():
-	var closest = null
 	var distance_to = 999999
-	for i in units:
-		var new_distance_to = global_position.distance_to(i.global_position)
-		if new_distance_to < distance_to:
-			distance_to = new_distance_to
-			closest = i
-	return closest
-	
+	if units:
+		for i in units:
+			if is_instance_valid(i):
+				var new_distance_to = global_position.distance_to(i.global_position)
+				if new_distance_to < distance_to:
+					distance_to = new_distance_to
+					closest = i
+		return closest
+	else:
+		return false
 
 
 func _on_hurt_box_hurt(damage):
 	hit_points -= damage
+	print("Goblin Hit Points: " + str(hit_points))
 	if hit_points <= 0:
+		closest = null
 		queue_free()
