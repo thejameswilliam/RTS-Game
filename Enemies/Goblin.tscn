@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://b1vl34sb4b2u2"]
+
+[ext_resource type="Texture2D" uid="uid://cxq3f3tkicf8o" path="res://images/MiniWorldSprites/Characters/Monsters/Orcs/ClubGoblin.png" id="1_1ndn2"]
+[ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_f3enq"]
+[ext_resource type="PackedScene" uid="uid://fjqo083wps36" path="res://Utility/defend.tscn" id="3_4deky"]
+[ext_resource type="PackedScene" uid="uid://bwl8xaexlmh1c" path="res://Utility/attack.tscn" id="4_vece0"]
+
+[sub_resource type="Animation" id="Animation_2qq8g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArcherGoblin:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ivbuj"]
+resource_name = "goblin_animation"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArcherGoblin:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ptjkh"]
+_data = {
+"RESET": SubResource("Animation_2qq8g"),
+"goblin_animation": SubResource("Animation_ivbuj")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pnmdx"]
+radius = 3.0
+height = 10.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ac5q7"]
+radius = 4.0
+height = 14.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3gngs"]
+radius = 4.0
+height = 14.0
+
+[node name="enemy_goblin" type="CharacterBody2D"]
+script = ExtResource("1_f3enq")
+
+[node name="ArcherGoblin" type="Sprite2D" parent="."]
+texture = ExtResource("1_1ndn2")
+hframes = 5
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ptjkh")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_pnmdx")
+
+[node name="AttackBox" parent="." instance=ExtResource("4_vece0")]
+visible = false
+collision_layer = 4
+collision_mask = 4
+
+[node name="HitCollisionShape2D" parent="AttackBox" index="0"]
+shape = SubResource("CapsuleShape2D_ac5q7")
+
+[node name="DefendBox" parent="." instance=ExtResource("3_4deky")]
+visible = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="HurtCollisionShape2D" parent="DefendBox" index="0"]
+shape = SubResource("CapsuleShape2D_3gngs")
+
+[editable path="AttackBox"]
+[editable path="DefendBox"]
