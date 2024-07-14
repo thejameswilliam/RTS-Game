@@ -89,7 +89,7 @@ y_sort_enabled = true
 position = Vector2(-40, -25)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.132764, 0.10841, 0.126126, 1)
+color = Color(0.182193, 0.151607, 0.173852, 1)
 
 [node name="Warrior" parent="." instance=ExtResource("8_7nqa0")]
 position = Vector2(-31, 11)

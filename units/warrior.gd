@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var selected: bool = false
 
-@onready var box: Panel = $Box
+@onready var box: Panel = $SelectionBox
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var target = position
 

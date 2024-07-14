@@ -1,20 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://duvegjudp7c0u"]
+[gd_scene load_steps=15 format=3 uid="uid://duvegjudp7c0u"]
 
 [ext_resource type="Script" path="res://units/worker.gd" id="1_krnlt"]
 [ext_resource type="Texture2D" uid="uid://dddis8r16txr2" path="res://images/MiniWorldSprites/Characters/Workers/RedWorker/FarmerRed.png" id="2_qn3vu"]
 [ext_resource type="Script" path="res://units/SelectionArea.gd" id="3_ui77v"]
 [ext_resource type="PackedScene" uid="uid://fjqo083wps36" path="res://Utility/defend.tscn" id="4_djo7x"]
 [ext_resource type="Texture2D" uid="uid://1j8impsxq4pj" path="res://images/Environment/light.png" id="5_vyjwc"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnrev"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.5717, 0.913409, 0, 1)
-border_blend = true
-shadow_color = Color(0, 0, 0, 0)
 
 [sub_resource type="Animation" id="Animation_d2aq6"]
 length = 0.001
@@ -68,6 +58,23 @@ radius = 9.0
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o3dsm"]
 polygon = PackedVector2Array(0, -6.71141, 5.36913, -12.0805, 5.36913, -1.34228, -5.36913, -1.34228, -5.36913, -12.0805)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4uc1h"]
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnrev"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5717, 0.913409, 0, 1)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+shadow_color = Color(0, 0, 0, 0)
+
 [node name="Worker" type="CharacterBody2D"]
 position = Vector2(0, 1)
 collision_layer = 10
@@ -76,19 +83,11 @@ motion_mode = 1
 script = ExtResource("1_krnlt")
 
 [node name="Worker" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -1)
 texture = ExtResource("2_qn3vu")
 hframes = 5
 vframes = 12
 frame = 1
-
-[node name="SelectionBox" type="Panel" parent="."]
-offset_left = -8.0
-offset_top = -17.0
-offset_right = 7.0
-tooltip_text = "sssssssss"
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_gnrev")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -96,10 +95,11 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_pk7l2")
 
 [node name="DefendBox" parent="." instance=ExtResource("4_djo7x")]
+position = Vector2(0, 7)
 collision_layer = 4
 collision_mask = 4
 input_pickable = false
@@ -109,6 +109,7 @@ position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_how5g")
 
 [node name="SelectionArea" type="Area2D" parent="."]
+position = Vector2(0, 7)
 script = ExtResource("3_ui77v")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="SelectionArea"]
@@ -116,19 +117,33 @@ position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_o7xjl")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-position = Vector2(6, -9)
+show_behind_parent = true
+clip_children = 1
+position = Vector2(6, -2)
 rotation = -1.57079
 scale = Vector2(0.745, 0.745)
 occluder = SubResource("OccluderPolygon2D_o3dsm")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(0, -9)
+position = Vector2(0, -2)
 scale = Vector2(0.745, 0.745)
 color = Color(1, 0.913568, 0.748133, 1)
 energy = 0.5
 blend_mode = 2
 shadow_enabled = true
+shadow_color = Color(0, 0, 0.223529, 0)
 texture = ExtResource("5_vyjwc")
+
+[node name="SelectionBox" type="Panel" parent="."]
+light_mask = 2
+material = SubResource("CanvasItemMaterial_4uc1h")
+offset_left = -9.0
+offset_top = -10.0
+offset_right = 9.0
+offset_bottom = 7.0
+tooltip_text = "sssssssss"
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_gnrev")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="defend" from="DefendBox" to="." method="_on_defend_box_defend"]
