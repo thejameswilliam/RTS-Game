@@ -3,8 +3,14 @@ extends Node2D
 var units: Array = []
 
 
+
 func _ready():
 	get_units()
+	
+	
+func _process(_delta):
+	if units.size() <= 0:
+		print("GAME OVER, MAN")
 	
 func get_units():
 	units = []

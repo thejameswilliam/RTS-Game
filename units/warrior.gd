@@ -17,8 +17,9 @@ var cost = {
 
 func _ready():
 	set_selected(selected)
-	add_to_group("warriors", true)
 	add_to_group("units", true)
+	add_to_group("warriors", true)
+	
 
 func set_selected(_selected: bool):
 	selected = _selected
@@ -33,6 +34,7 @@ func _input(event):
 
 
 func _physics_process(_delta):
+	look_at_point()
 	if folow_cursor:
 		if selected:
 			target = get_global_mouse_position()
@@ -45,11 +47,19 @@ func _physics_process(_delta):
 
 
 
+func look_at_point():
+	if target:
+		rotation = lerp_angle(rotation, (position - target).angle(), 0.1)
+		
+		
+func unit_death():
+	pass
+
 func _on_selection_area_selection_toggled(selection):
 	set_selected(selection)
-	pass # Replace with function body.
 
 
 func _on_defend_box_defend(damage):
 	hit_points -= damage
-	print("Warrior Hit Points: " + str(hit_points))
+	if hit_points <= 0:
+		unit_death()

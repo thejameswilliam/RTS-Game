@@ -1,13 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://b57ofnq5htffv"]
+[gd_scene load_steps=16 format=3 uid="uid://b57ofnq5htffv"]
 
 [ext_resource type="Script" path="res://units/warrior.gd" id="1_mnjex"]
 [ext_resource type="Texture2D" uid="uid://5l40anv6nppw" path="res://images/MiniWorldSprites/Characters/Soldiers/Melee/RedMelee/SwordsmanRed.png" id="2_jre7o"]
 [ext_resource type="Script" path="res://units/SelectionArea.gd" id="3_2a34g"]
 [ext_resource type="PackedScene" uid="uid://bwl8xaexlmh1c" path="res://Utility/attack.tscn" id="4_gwjik"]
 [ext_resource type="PackedScene" uid="uid://fjqo083wps36" path="res://Utility/defend.tscn" id="5_lejo6"]
+[ext_resource type="Texture2D" uid="uid://1j8impsxq4pj" path="res://images/Environment/light.png" id="6_esm5q"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fuosd"]
-size = Vector2(13, 10.5)
+[sub_resource type="CircleShape2D" id="CircleShape2D_t3i6h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pb1ru"]
 bg_color = Color(0.6, 0.6, 0.6, 0.137255)
@@ -56,7 +56,8 @@ _data = {
 "Walk Down": SubResource("Animation_p2st4")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_t3i6h"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fuosd"]
+size = Vector2(13, 10.5)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ogolh"]
 radius = 5.0
@@ -66,9 +67,19 @@ height = 14.0
 radius = 3.0
 height = 12.0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qwc32"]
+polygon = PackedVector2Array(0, -6.71141, 5.36913, -12.0805, 5.36913, -1.34228, -5.36913, -1.34228, -5.36913, -12.0805)
+
 [node name="Warrior" type="CharacterBody2D"]
 position = Vector2(0, 1)
 script = ExtResource("1_mnjex")
+
+[node name="SelectionArea" type="Area2D" parent="."]
+script = ExtResource("3_2a34g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionArea"]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_t3i6h")
 
 [node name="Warrior" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
@@ -77,17 +88,12 @@ hframes = 5
 vframes = 12
 frame = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -6.75)
-shape = SubResource("RectangleShape2D_fuosd")
-
 [node name="Box" type="Panel" parent="."]
-visible = false
 offset_left = -8.0
 offset_top = -17.0
 offset_right = 8.0
 offset_bottom = -1.0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_pb1ru")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -95,17 +101,14 @@ libraries = {
 "": SubResource("AnimationLibrary_r57fb")
 }
 
-[node name="SelectionArea" type="Area2D" parent="."]
-visible = false
-script = ExtResource("3_2a34g")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="SelectionArea"]
-position = Vector2(0, -9)
-shape = SubResource("CircleShape2D_t3i6h")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6.75)
+shape = SubResource("RectangleShape2D_fuosd")
 
 [node name="AttackBox" parent="." instance=ExtResource("4_gwjik")]
 collision_layer = 2
 collision_mask = 2
+input_pickable = false
 
 [node name="HitCollisionShape2D" parent="AttackBox" index="0"]
 position = Vector2(-2, -8)
@@ -114,10 +117,26 @@ shape = SubResource("CapsuleShape2D_ogolh")
 [node name="DefendBox" parent="." instance=ExtResource("5_lejo6")]
 collision_layer = 4
 collision_mask = 4
+input_pickable = false
 
 [node name="HurtCollisionShape2D" parent="DefendBox" index="0"]
 position = Vector2(0, -9)
 shape = SubResource("CapsuleShape2D_i1ivh")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(6, -9)
+rotation = -1.57079
+scale = Vector2(0.745, 0.745)
+occluder = SubResource("OccluderPolygon2D_qwc32")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -9)
+scale = Vector2(0.745, 0.745)
+color = Color(1, 0.913568, 0.748133, 1)
+energy = 0.5
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("6_esm5q")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="selection_toggled" from="SelectionArea" to="." method="_on_selection_area_selection_toggled"]

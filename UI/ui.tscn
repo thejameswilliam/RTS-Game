@@ -1448,9 +1448,10 @@ script = ExtResource("1_skct8")
 theme_override_styles/panel = SubResource("StyleBoxFlat_pjiyy")
 
 [node name="WoodLabel" type="Label" parent="."]
-offset_left = 1528.0
-offset_right = 1969.0
-offset_bottom = 118.0
+offset_left = 1344.0
+offset_top = -6.0
+offset_right = 1785.0
+offset_bottom = 112.0
 theme = SubResource("Theme_4rilx")
 theme_type_variation = &"GraphNodeTitleLabel"
 theme_override_font_sizes/font_size = 60
@@ -1461,9 +1462,11 @@ justification_flags = 225
 uppercase = true
 
 [node name="FoodLabel" type="Label" parent="."]
-offset_left = 1064.0
-offset_right = 1505.0
-offset_bottom = 118.0
+offset_left = 880.0
+offset_top = -6.0
+offset_right = 1321.0
+offset_bottom = 112.0
+rotation = -0.00353
 theme = SubResource("Theme_4rilx")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxFlat_b3jdx")

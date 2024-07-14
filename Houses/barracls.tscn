@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://occa8lx1sxeo"]
+[gd_scene load_steps=6 format=3 uid="uid://occa8lx1sxeo"]
 
 [ext_resource type="Script" path="res://Houses/barracks.gd" id="1_5t64f"]
 [ext_resource type="Texture2D" uid="uid://b87jyy7lt6s2e" path="res://images/MiniWorldSprites/Buildings/Wood/Barracks.png" id="2_nhl0m"]
@@ -14,6 +14,9 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.172549, 0.537255, 0.854902, 1)
 border_blend = true
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gvtbb"]
+polygon = PackedVector2Array(16, -33, 16, 0, -16, 0, -16, -33)
 
 [node name="BarbHouse" type="StaticBody2D"]
 input_pickable = true
@@ -37,6 +40,9 @@ offset_right = 17.0
 offset_bottom = 1.0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_pb1ru")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_gvtbb")
 
 [connection signal="mouse_entered" from="." to="." method="_on_barb_house_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_barb_house_mouse_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqa0sxgaqcyjp"]
+[gd_scene load_steps=7 format=3 uid="uid://dqa0sxgaqcyjp"]
 
 [ext_resource type="Script" path="res://World Objects/tree.gd" id="1_oe537"]
 [ext_resource type="Texture2D" uid="uid://dppngi80c6hmc" path="res://images/MiniWorldSprites/Nature/Trees.png" id="2_bg3ud"]
@@ -11,6 +11,9 @@ radius = 13.5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0et42"]
 bg_color = Color(0.234123, 0.500058, 0.0765023, 1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qmgup"]
+polygon = PackedVector2Array(0, -6, 3, -6, 3, -3, -3, -3, -3, -6)
 
 [node name="Tree" type="StaticBody2D"]
 scale = Vector2(2, 2)
@@ -27,6 +30,8 @@ position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_s11cc")
 
 [node name="ChopArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChopArea"]
 position = Vector2(0, -5)
@@ -43,6 +48,10 @@ value = 40.0
 show_percentage = false
 
 [node name="chopTimer" type="Timer" parent="."]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(0, 3)
+occluder = SubResource("OccluderPolygon2D_qmgup")
 
 [connection signal="frame_changed" from="Trees" to="." method="_on_trees_frame_changed"]
 [connection signal="body_entered" from="ChopArea" to="." method="_on_chop_area_body_entered"]

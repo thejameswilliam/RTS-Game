@@ -9,34 +9,34 @@ y_sort_enabled = true
 script = ExtResource("1_75r1d")
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 500.0
-offset_top = 760.0
-offset_right = 1479.0
-offset_bottom = 1165.0
+offset_left = 422.0
+offset_top = 220.0
+offset_right = 1401.0
+offset_bottom = 625.0
 
 [node name="CreateWorker" type="Button" parent="."]
-offset_left = 620.0
-offset_top = 1060.0
-offset_right = 840.0
-offset_bottom = 1120.0
+offset_left = 542.0
+offset_top = 520.0
+offset_right = 762.0
+offset_bottom = 580.0
 text = "WORKER"
 
 [node name="CreateWarrior" type="Button" parent="."]
-offset_left = 880.0
-offset_top = 1060.0
-offset_right = 1100.0
-offset_bottom = 1120.0
+offset_left = 802.0
+offset_top = 520.0
+offset_right = 1022.0
+offset_bottom = 580.0
 text = "WARRIOR"
 
 [node name="Close" type="Button" parent="."]
-offset_left = 1420.0
-offset_top = 780.0
-offset_right = 1460.0
-offset_bottom = 820.0
+offset_left = 1342.0
+offset_top = 240.0
+offset_right = 1382.0
+offset_bottom = 280.0
 text = "X"
 
 [node name="Worker" type="Sprite2D" parent="."]
-position = Vector2(740, 960)
+position = Vector2(662, 420)
 scale = Vector2(7.5, 7.5)
 texture = ExtResource("2_yfobt")
 hframes = 5
@@ -44,7 +44,7 @@ vframes = 12
 frame = 23
 
 [node name="Warrior" type="Sprite2D" parent="."]
-position = Vector2(980, 960)
+position = Vector2(902, 420)
 scale = Vector2(7.5, 7.49999)
 texture = ExtResource("3_kwgt8")
 hframes = 5

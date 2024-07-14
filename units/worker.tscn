@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://duvegjudp7c0u"]
+[gd_scene load_steps=14 format=3 uid="uid://duvegjudp7c0u"]
 
 [ext_resource type="Script" path="res://units/worker.gd" id="1_krnlt"]
 [ext_resource type="Texture2D" uid="uid://dddis8r16txr2" path="res://images/MiniWorldSprites/Characters/Workers/RedWorker/FarmerRed.png" id="2_qn3vu"]
 [ext_resource type="Script" path="res://units/SelectionArea.gd" id="3_ui77v"]
 [ext_resource type="PackedScene" uid="uid://fjqo083wps36" path="res://Utility/defend.tscn" id="4_djo7x"]
+[ext_resource type="Texture2D" uid="uid://1j8impsxq4pj" path="res://images/Environment/light.png" id="5_vyjwc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnrev"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -57,17 +58,20 @@ _data = {
 radius = 3.0
 height = 12.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_o7xjl"]
-radius = 9.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_how5g"]
 radius = 5.0
 height = 14.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_o7xjl"]
+radius = 9.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o3dsm"]
+polygon = PackedVector2Array(0, -6.71141, 5.36913, -12.0805, 5.36913, -1.34228, -5.36913, -1.34228, -5.36913, -12.0805)
+
 [node name="Worker" type="CharacterBody2D"]
 position = Vector2(0, 1)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 10
+collision_mask = 10
 motion_mode = 1
 script = ExtResource("1_krnlt")
 
@@ -94,6 +98,15 @@ libraries = {
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_pk7l2")
 
+[node name="DefendBox" parent="." instance=ExtResource("4_djo7x")]
+collision_layer = 4
+collision_mask = 4
+input_pickable = false
+
+[node name="HurtCollisionShape2D" parent="DefendBox" index="0"]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_how5g")
+
 [node name="SelectionArea" type="Area2D" parent="."]
 script = ExtResource("3_ui77v")
 
@@ -101,17 +114,26 @@ script = ExtResource("3_ui77v")
 position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_o7xjl")
 
-[node name="DefendBox" parent="." instance=ExtResource("4_djo7x")]
-collision_layer = 4
-collision_mask = 4
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(6, -9)
+rotation = -1.57079
+scale = Vector2(0.745, 0.745)
+occluder = SubResource("OccluderPolygon2D_o3dsm")
 
-[node name="HurtCollisionShape2D" parent="DefendBox" index="0"]
-position = Vector2(0, -8)
-shape = SubResource("CapsuleShape2D_how5g")
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -9)
+scale = Vector2(0.745, 0.745)
+color = Color(1, 0.913568, 0.748133, 1)
+energy = 0.5
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("5_vyjwc")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="mouse_entered" from="SelectionArea" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="selection_toggled" from="SelectionArea" to="." method="_on_selection_area_selection_toggled"]
 [connection signal="defend" from="DefendBox" to="." method="_on_defend_box_defend"]
+[connection signal="mouse_entered" from="SelectionArea" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_entered" from="SelectionArea" to="SelectionArea" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SelectionArea" to="SelectionArea" method="_on_mouse_exited"]
+[connection signal="selection_toggled" from="SelectionArea" to="." method="_on_selection_area_selection_toggled"]
 
 [editable path="DefendBox"]

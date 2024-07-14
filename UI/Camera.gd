@@ -1,7 +1,7 @@
 extends Camera2D
 
 #Camera Control
-@export var SPEED = 5.0
+@export var SPEED = 20.0
 @export var ZOOM_SPEED = 20.0
 @export var ZOOM_MARGIN = 0.1
 @export var ZOOM_MIN = 3
@@ -24,7 +24,7 @@ var isDragging: bool = false
 
 signal area_selected
 signal atart_move_selection
-
+signal double_click
 
 func _ready():
 	connect("area_selected", Callable(get_parent(), "_on_area_selected"))
@@ -36,10 +36,8 @@ func _process(_delta):
 	var inputX = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 	var inputY = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
 
-	
 	position.x = lerp(position.x, position.x + inputX*SPEED * zoom.x, SPEED * _delta)
 	position.y = lerp(position.y, position.y + inputY*SPEED * zoom.y, SPEED * _delta)
-	
 	
 	zoom.x = lerp(zoom.x, zoom.x * zoomFactor, ZOOM_SPEED*_delta)
 	zoom.y = lerp(zoom.y, zoom.y * zoomFactor, ZOOM_SPEED*_delta)
@@ -73,7 +71,6 @@ func _process(_delta):
 			isDragging = false
 			draw_area(false)
 
-	
 
 
 func _input(event):
@@ -83,6 +80,8 @@ func _input(event):
 	if abs(zoomPos.y - get_global_mouse_position().y) > ZOOM_MARGIN:
 		zoomFactor = 1.0
 	
+	if event is InputEventMouseButton:
+		emit_signal("double_click")
 	
 	if event is InputEventMouseButton:
 		if event.is_pressed():

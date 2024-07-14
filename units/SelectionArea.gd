@@ -7,6 +7,7 @@ signal selection_toggled(selection)
 var selected = false
 
 func set_selected(selection):
+	print(selection)
 	if selection:
 		add_to_group("selected")
 	else :
@@ -28,5 +29,7 @@ func _process(delta):
 
 
 func _input_event(viewport, event, shape_idx):
+	print(selection_action)
 	if event.is_action_pressed(selection_action):
 		set_selected(not selected)
+#

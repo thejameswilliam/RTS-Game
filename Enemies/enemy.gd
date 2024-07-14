@@ -43,5 +43,4 @@ func _on_hurt_box_hurt(damage):
 	hit_points -= damage
 	print("Goblin Hit Points: " + str(hit_points))
 	if hit_points <= 0:
-		closest = null
 		queue_free()

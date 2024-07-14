@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dqa0sxgaqcyjp" path="res://World Objects/tree.tscn" id="4_dbqhf"]
 [ext_resource type="PackedScene" uid="uid://bg2ohhatacu6c" path="res://UI/ui.tscn" id="5_v8451"]
 [ext_resource type="PackedScene" uid="uid://occa8lx1sxeo" path="res://Houses/barracls.tscn" id="7_230ge"]
-[ext_resource type="PackedScene" uid="uid://b1vl34sb4b2u2" path="res://Enemies/Goblin.tscn" id="9_6i8rs"]
+[ext_resource type="PackedScene" uid="uid://b57ofnq5htffv" path="res://units/Warrior.tscn" id="8_7nqa0"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -22,14 +22,13 @@ offset_bottom = 340.0
 texture = ExtResource("2_srcar")
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
-limit_left = -5000
-limit_top = -5000
-limit_right = 5000
-limit_bottom = 5000
+limit_left = -500
+limit_top = -550
+limit_right = 500
+limit_bottom = 500
 position_smoothing_enabled = true
 script = ExtResource("1_kjri0")
 
@@ -38,8 +37,14 @@ script = ExtResource("1_kjri0")
 [node name="Units" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Unit5" parent="Units" instance=ExtResource("2_7u3o2")]
-position = Vector2(-101, 138)
+[node name="Unit7" parent="Units" instance=ExtResource("2_7u3o2")]
+position = Vector2(-165, -31)
+
+[node name="Unit8" parent="Units" instance=ExtResource("2_7u3o2")]
+position = Vector2(-22, -81)
+
+[node name="Unit9" parent="Units" instance=ExtResource("2_7u3o2")]
+position = Vector2(7, 4)
 
 [node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -57,7 +62,7 @@ position = Vector2(109, -72)
 position = Vector2(-33, 97)
 
 [node name="Tree5" parent="Objects" instance=ExtResource("4_dbqhf")]
-position = Vector2(-197, 52)
+position = Vector2(-142, 39)
 
 [node name="Tree6" parent="Objects" instance=ExtResource("4_dbqhf")]
 position = Vector2(-224, -200)
@@ -65,11 +70,26 @@ position = Vector2(-224, -200)
 [node name="Tree7" parent="Objects" instance=ExtResource("4_dbqhf")]
 position = Vector2(-62, -101)
 
+[node name="Tree8" parent="Objects" instance=ExtResource("4_dbqhf")]
+position = Vector2(-228, 230)
+
+[node name="Tree9" parent="Objects" instance=ExtResource("4_dbqhf")]
+position = Vector2(216, 39)
+
+[node name="Tree10" parent="Objects" instance=ExtResource("4_dbqhf")]
+position = Vector2(-249, -255)
+
+[node name="Tree11" parent="Objects" instance=ExtResource("4_dbqhf")]
+position = Vector2(63, -230)
+
 [node name="Houses" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="BarbHouse" parent="Houses" instance=ExtResource("7_230ge")]
 position = Vector2(-40, -25)
 
-[node name="enemy_goblin" parent="." instance=ExtResource("9_6i8rs")]
-position = Vector2(-131, 151)
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.132764, 0.10841, 0.126126, 1)
+
+[node name="Warrior" parent="." instance=ExtResource("8_7nqa0")]
+position = Vector2(-31, 11)
