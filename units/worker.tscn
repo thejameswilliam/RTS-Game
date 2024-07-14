@@ -82,10 +82,11 @@ hframes = 5
 vframes = 12
 frame = 1
 
-[node name="Box" type="Panel" parent="."]
+[node name="SelectionBox" type="Panel" parent="."]
 offset_left = -8.0
 offset_top = -17.0
 offset_right = 7.0
+tooltip_text = "sssssssss"
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_gnrev")
 

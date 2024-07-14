@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var selected: bool = false
 
-@onready var box: Panel = $Box
+@onready var box: Panel = $SelectionBox
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var target = position
 
@@ -35,6 +35,8 @@ func _input(event):
 		folow_cursor = false
 
 
+	
+
 func _physics_process(_delta):
 	
 	look_at_point()
@@ -56,6 +58,7 @@ func look_at_point():
 
 func unit_death():
 	queue_free()
+	
 	
 
 func _on_selection_area_selection_toggled(selection):

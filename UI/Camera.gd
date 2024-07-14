@@ -24,11 +24,9 @@ var isDragging: bool = false
 
 signal area_selected
 signal atart_move_selection
-signal double_click
 
 func _ready():
 	connect("area_selected", Callable(get_parent(), "_on_area_selected"))
-
 
 func _process(_delta):
 	
@@ -67,11 +65,24 @@ func _process(_delta):
 			draw_area(false)
 			emit_signal("area_selected", self)
 		else:
+			var closest = get_closest_node_in_group("units", start)
+			if closest.global_position.distance_to(mousePosGlobal) > 20:
+				get_tree().call_group("units","set_selected", false)
+			
 			end = start
 			isDragging = false
 			draw_area(false)
 
 
+func get_closest_node_in_group(group, pos):
+	var nodes = get_tree().get_nodes_in_group(group)
+	# assume the first spawn node is closest
+	var closest = nodes[0]
+	for node in nodes:
+		if node.global_position.distance_to(pos) < closest.global_position.distance_to(pos):
+			closest = node
+
+	return closest
 
 func _input(event):
 	
@@ -79,9 +90,8 @@ func _input(event):
 		zoomFactor = 1.0
 	if abs(zoomPos.y - get_global_mouse_position().y) > ZOOM_MARGIN:
 		zoomFactor = 1.0
-	
-	if event is InputEventMouseButton:
-		emit_signal("double_click")
+		
+
 	
 	if event is InputEventMouseButton:
 		if event.is_pressed():

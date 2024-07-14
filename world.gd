@@ -10,11 +10,13 @@ func _ready():
 	
 func _process(_delta):
 	if units.size() <= 0:
-		print("GAME OVER, MAN")
+		pass
+		#print("GAME OVER, MAN")
 	
 func get_units():
 	units = []
 	units = get_tree().get_nodes_in_group("units")
+
 
 func _on_area_selected(object):
 	var start = object.start
